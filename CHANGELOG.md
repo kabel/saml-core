@@ -1,5 +1,37 @@
 Changelog
 =========
+# 5.0.7 2025-04-25
+## Fixed
+- moving post execution to script tag
+
+# 5.0.6 2025-02-13
+## Fixed
+- backwards compatibility with logout
+
+# 5.0.5 2025-02-13
+## Added
+- Adding support for explicit logout for SPs
+
+# 5.0.4 2025-01-07
+## Fixed
+- revert: filter role decriptors only selecting saml
+
+# 5.0.3 2025-01-27
+## Fixed
+- filter role decriptors only selecting saml
+
+# 5.0.2 2024-12-03 [CRITICAL]
+## Fixed
+- SECURITY PATCH - UPDATE REQUIRED! For more information see: https://github.com/simplesamlphp/saml2/security/advisories/GHSA-pxm4-r5ph-q2m2#event-375127
+
+# 5.0.1 2024-04-17
+## Fixed
+- Issues with cp crumbs
+
+# 5.0.0 2024-04-17
+## Fixed
+- Craft 5.0 compatibility
+
 # 4.2.5 2024-02-13
 ## Fixed
 - backwards compatibility with logout

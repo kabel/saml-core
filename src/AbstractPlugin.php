@@ -95,9 +95,7 @@ abstract class AbstractPlugin extends Plugin
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
             function (Event $event) {
-                /**
-            * @var CraftVariable $variable
-            */
+                /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set($this->getPluginVariableHandle(), self::getInstance());
                 $variable->set('samlCp', $this->getCp());
@@ -401,13 +399,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getCp()
     {
-
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
-        /**
- * @noinspection PhpIncompatibleReturnTypeInspection
-*/
         return $this->get('cp');
     }
 
@@ -416,10 +407,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getEditProvider()
     {
-
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
         return $this->get('editProvider');
     }
 
@@ -428,10 +415,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getProvider()
     {
-
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
         return $this->get('provider');
     }
 
@@ -449,12 +432,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getMetadata()
     {
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
-        /**
- * @noinspection PhpIncompatibleReturnTypeInspection
-*/
         return $this->get('metadata');
     }
 
@@ -465,12 +442,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getLogoutRequest()
     {
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
-        /**
- * @noinspection PhpIncompatibleReturnTypeInspection
-*/
         return $this->get('logoutRequest');
     }
 
@@ -481,12 +452,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getLogoutResponse()
     {
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
-        /**
- * @noinspection PhpIncompatibleReturnTypeInspection
-*/
         return $this->get('logoutResponse');
     }
 
@@ -500,12 +465,6 @@ abstract class AbstractPlugin extends Plugin
      */
     public function getBindingFactory()
     {
-        /**
- * @noinspection PhpUnhandledExceptionInspection
-*/
-        /**
- * @noinspection PhpIncompatibleReturnTypeInspection
-*/
         return $this->get('bindingFactory');
     }
 

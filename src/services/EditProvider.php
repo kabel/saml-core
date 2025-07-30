@@ -143,7 +143,7 @@ class EditProvider extends Component
                     'url' => UrlHelper::cpUrl(
                         $this->getPlugin()->getHandle() . '/metadata/' . $provider->id
                     ),
-                    'label' => $provider->label ?: $provider->entityId,
+                    'label' => ($provider->label ?: $provider->entityId) ?: "Edit",
                 ],
             ];
             $variables['keypair'] = $provider->keychain;

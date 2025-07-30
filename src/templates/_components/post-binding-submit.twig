@@ -3,9 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'nonce-2726c7f26c' https:" />
     <title>POST data</title>
+    <script nonce="2726c7f26c">
+    window.onload = function() {
+        document.getElementsByTagName('input')[0].click();
+    };
+    </script>
 </head>
-<body onload="document.getElementsByTagName('input')[0].click();">
+<body>
 
 <noscript>
     <p><strong>Note:</strong> Since your browser does not support JavaScript, you must
