@@ -3,6 +3,7 @@
 
 namespace flipbox\saml\core\containers;
 
+use craft\helpers\StringHelper;
 use craft\web\Response;
 use flipbox\saml\core\AbstractPlugin;
 use flipbox\saml\core\EnsureSAMLPlugin;
@@ -84,7 +85,6 @@ class Saml2Container extends AbstractContainer implements EnsureSAMLPlugin
      */
     public function redirect(string $url, array $data = []): void
     {
-
         $url = SerializeHelper::redirectUrl($url, $data);
 
         \Craft::$app->response->redirect($url);
@@ -101,15 +101,15 @@ class Saml2Container extends AbstractContainer implements EnsureSAMLPlugin
      */
     public function postRedirect(string $url, array $data = []): void
     {
-
         $data['destination'] = $url;
+        $data['nonce'] = StringHelper::UUID();
 
         if (!isset($data['RelayState'])) {
             $data['RelayState'] = '';
         }
 
         $view = \Craft::$app->getView();
-        $view->setTemplateMode($view::TEMPLATE_MODE_CP);
+        $view->setTemplateMode(\craft\web\View::TEMPLATE_MODE_CP);
         \Craft::$app->response->data = $view->renderTemplate(
             $this->getTemplatePath(),
             $data
