@@ -26,7 +26,7 @@
                 {% for provider in spProviders %}
                     <tr data-id="">
                         <td data-title="label">
-                            <div class="element small hasstatus "
+                            <div class="element small chip chromeless"
                                  data-status="active"
                                     {% if myProvider and myProvider.id == provider.id %}
                                         data-url="{{ cpUrl(plugin.handle ~ '/metadata/my-provider') }}"
@@ -82,7 +82,7 @@
                 {% for provider in idpProviders %}
                     <tr data-id="">
                         <td data-title="label">
-                            <div class="element small hasstatus "
+                            <div class="element small chip chromeless"
                                  data-status="active"
                                         data-url="{{ cpUrl(plugin.handle ~ '/metadata/' ~ provider.id) }}"
                                  data-level="" data-editable="">
