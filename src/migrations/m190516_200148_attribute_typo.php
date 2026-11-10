@@ -8,7 +8,6 @@ use flipbox\saml\core\records\AbstractProvider;
 /**
  * mm190516_200148_attribute_typo migration.
  */
-// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 abstract class m190516_200148_attribute_typo extends Migration
 {
     abstract protected static function getProviderRecord(): string;

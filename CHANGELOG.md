@@ -1,5 +1,42 @@
 Changelog
 =========
+# 5.0.12 2026-11-07
+## Changed
+- Control panel pages use Craft's own markup and classes (section dividers, sidebar fields and metadata, copy-text inputs, secondary buttons), so they match the rest of the control panel
+- The IdP mapping preview highlights XML with Craft's bundled highlighter (`PrismJsAsset`) instead of loading highlight.js from cdnjs
+## Fixed
+- The metadata XML field was nested inside the field heading and rendered at half width
+- Sync User Groups errors were looked up under a misspelled `syncCroups` key
+## Removed
+- `web/assets/css/saml-core.css`; the `SamlCore` asset bundle now only registers JavaScript
+- Unused `_cp/metadata/_macros/sites.twig` and `_cp/metadata/_includes/editableTable.twig` templates
+# 5.0.11 2026-11-05
+## Security
+- requiring simplesamlphp/saml2 `~4.19.4` to fix GHSA-6vhm-xfmv-94pj (HTTP-Redirect DEFLATE DoS), GHSA-5cjr-mxj5-wmrx (XPath Transform DoS), GHSA-6929-8p9f-26jx (HTTP-Artifact auth bypass), and pulls robrichards/xmlseclibs 3.1.5 (AES-GCM tag validation)
+- implementing `Saml2Container::getInflateSizeLimit()` (8 MB) required by the patched saml2 releases
+- staying on saml2 4.19.x: 4.20.x requires the `simplesamlphp/composer-xmlprovider-installer` Composer plugin (Composer 2.9+), which would break updates on sites that haven't allowed it
+- `SecurityHelper::decryptAssertion()` now passes `$blacklist` through to saml2, so blacklisted algorithms are actually rejected
+## Fixed
+- `psr3logger` component pointed at a missing class (`flipbox\craft\psr3\Logger`); now uses `containers\Logger`
+- `Saml2Container::getTempDir()` uses Craft's path service instead of the `CRAFT_STORAGE_PATH` constant
+## Removed
+- `services\AbstractCp`, which had a syntax error and depended on a non-existent class
+## Added
+- Codeception test suite, craftcms/ecs and craftcms/phpstan checks, and a GitHub Actions workflow
+- Merging a version bump to master now tags and publishes the GitHub release automatically
+
+# 5.0.10 2026-01-28
+## Added
+- added spinner to post login template
+
+# 5.0.9 2026-01-20
+## Fixed
+- content security policy issues with css (hide button)
+
+# 5.0.8 2026-01-12
+## Fixed
+- ui issues in list view in 5.0
+
 # 5.0.7 2025-04-25
 ## Fixed
 - moving post execution to script tag
@@ -32,31 +69,7 @@ Changelog
 ## Fixed
 - Craft 5.0 compatibility
 
-# 4.2.5 2024-02-13
-## Fixed
-- backwards compatibility with logout
-
-# 4.2.4 2024-02-13
-## Fixed
-- issue with route
-
-# 4.2.3 2024-02-12
-## Added
-- Adding support for explicit logout for SPs
-
-# 4.2.2 2024-12-03
-## Fixed
-- SECURITY PATCH! Update REQUIRED!! More info can be found here: https://github.com/simplesamlphp/saml2/security/advisories/GHSA-pxm4-r5ph-q2m2#event-375127
-
-# 4.2.1 2023-05-14
-## Fixed
-- namespace issue
-
-# 4.2.0 2023-05-14
-## Fixed
-- issues with psr/log 1 and 3 conflicts
-
-# 4.1.0 2023-02-10
+# 4.1.0 2024-02-10
 ## Fixed
 - Fixing issue with multi-site linking for the external id field
 

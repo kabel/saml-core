@@ -1,44 +1,24 @@
 {% extends "_layouts/cp" %}
-{% import "_includes/forms" as forms %}
 
 {% block content %}
-
-    <div class="readable">
-        <h2>Setup</h2>
-    </div>
-    <hr/>
-    <div class="readable">
-        <h3>Getting Started</h3>
-    </div>
-    <p>Steps to getting started:</p>
+    <h2>{{ "Getting Started"|t(plugin.handle) }}</h2>
     <ol>
         <li>
-            <a href="{{ cpUrl(baseCpPath ~ '/metadata/my-provider') }}" class="go nowrap">
-                Create your metadata
-            </a>
+            <a href="{{ cpUrl(baseCpPath ~ '/metadata/my-provider') }}" class="go">{{ "Create your metadata"|t(plugin.handle) }}</a>
         </li>
         <li>
-            <a href="{{ cpUrl(baseCpPath ~ '/metadata/new-' ~ plugin.settings.remoteType) }}" class="go nowrap">
-                Install the {{ plugin.settings.remoteType | upper }}'s metadata
-            </a>
+            <a href="{{ cpUrl(baseCpPath ~ '/metadata/new-' ~ plugin.settings.remoteType) }}" class="go">{{ "Install the {type}’s metadata"|t(plugin.handle, {type: plugin.settings.remoteType|upper}) }}</a>
         </li>
     </ol>
 {% endblock %}
 
 {% block details %}
-
     {% if ownProvider %}
-
-        <h2>System Configuration</h2>
-        <div class="meta">
-            <div class="field">
-                <div class="heading">
-                    Entity Id
-                </div>
-                <div class="input ltr code">
-                    {{ ownProvider.entityId }}
-                </div>
+        <dl class="meta read-only">
+            <div class="data">
+                <dt class="heading">{{ "Entity ID"|t(plugin.handle) }}</dt>
+                <dd class="value"><code>{{ ownProvider.entityId }}</code></dd>
             </div>
-        </div>
+        </dl>
     {% endif %}
 {% endblock %}

@@ -17,8 +17,7 @@ use flipbox\saml\core\EnsureSAMLPlugin;
  */
 abstract class AbstractGeneralController extends AbstractController implements EnsureSAMLPlugin
 {
-
-    const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp';
+    public const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp';
 
     /**
      * @return \yii\web\Response
@@ -35,13 +34,12 @@ abstract class AbstractGeneralController extends AbstractController implements E
     {
         $variables = $this->getPlugin()->getEditProvider()->getBaseVariables();
         $variables['crumbs'][] = [
-            'url'   => UrlHelper::cpUrl($this->getPlugin()->getHandle()),
-            'label' => 'SSO Provider'
+            'url' => UrlHelper::cpUrl($this->getPlugin()->getHandle()),
+            'label' => 'SSO Provider',
         ];
 
         return $this->renderTemplate(
-            $this->getPlugin()->getEditProvider()->getTemplateIndex() .
-                static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'setup',
+            $this->getPlugin()->getEditProvider()->getTemplateIndex() . static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'setup',
             $variables
         );
     }
@@ -56,12 +54,12 @@ abstract class AbstractGeneralController extends AbstractController implements E
 
         // Breadcrumbs
         $variables['crumbs'][] = [
-            'url'   => UrlHelper::cpUrl($this->getPlugin()->getHandle()),
-            'label' => 'SSO Provider'
+            'url' => UrlHelper::cpUrl($this->getPlugin()->getHandle()),
+            'label' => 'SSO Provider',
         ];
         $variables['crumbs'][] = [
-            'url'   => UrlHelper::cpUrl($this->getPlugin()->getHandle() . '/settings'),
-            'label' => 'Settings'
+            'url' => UrlHelper::cpUrl($this->getPlugin()->getHandle() . '/settings'),
+            'label' => 'Settings',
         ];
 
         /**
@@ -74,8 +72,7 @@ abstract class AbstractGeneralController extends AbstractController implements E
         $variables['fullPageForm'] = true;
 
         return $this->renderTemplate(
-            $this->getPlugin()->getEditProvider()->getTemplateIndex() .
-                static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'settings',
+            $this->getPlugin()->getEditProvider()->getTemplateIndex() . static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'settings',
             $variables
         );
     }

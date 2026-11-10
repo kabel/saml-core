@@ -19,8 +19,7 @@ use flipbox\saml\core\models\SettingsInterface;
  */
 abstract class AbstractDefaultController extends AbstractController implements EnsureSAMLPlugin
 {
-
-    const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp' . DIRECTORY_SEPARATOR . 'metadata';
+    public const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp' . DIRECTORY_SEPARATOR . 'metadata';
 
     /**
      * @return \yii\web\Response
@@ -76,8 +75,7 @@ abstract class AbstractDefaultController extends AbstractController implements E
 
         $variables['title'] = Craft::t($this->getPlugin()->getHandle(), $this->getPlugin()->name);
         return $this->renderTemplate(
-            $this->getPlugin()->getEditProvider()->getTemplateIndex() .
-                static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'list',
+            $this->getPlugin()->getEditProvider()->getTemplateIndex() . static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'list',
             $variables
         );
     }
@@ -91,7 +89,7 @@ abstract class AbstractDefaultController extends AbstractController implements E
     {
         /** @var AbstractPlugin $plugin */
         $plugin = $this->getPlugin();
-        if (! in_array($providerType, [
+        if (!in_array($providerType, [
             SettingsInterface::SP,
             SettingsInterface::IDP,
         ])) {
@@ -101,6 +99,7 @@ abstract class AbstractDefaultController extends AbstractController implements E
         /**
          * Base return off of getMyType and the provider type passed
          */
+        $return = '';
         switch ($this->getPlugin()->getMyType()) {
             case SettingsInterface::IDP:
                 $return = SettingsInterface::SP === $providerType ? Craft::t(
@@ -118,8 +117,7 @@ abstract class AbstractDefaultController extends AbstractController implements E
                 ) : Craft::t(
                     $this->getPlugin()->getHandle(),
                     'These are the remote providers where the user ' .
-                    'authenticates, ie, OKTA, Microsoft AD, or Google, etc. ' .
-                    'To configure and IDP, simply obtain the metadata.'
+                    'authenticates, ie, OKTA, Microsoft AD, or Google, etc. To configure and IDP, simply obtain the metadata.'
                 );
                 break;
         }

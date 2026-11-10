@@ -4,16 +4,13 @@ namespace flipbox\saml\core\migrations;
 
 use craft\db\ActiveQuery;
 use craft\db\Migration;
-use craft\helpers\ArrayHelper;
 use flipbox\saml\core\records\AbstractProvider;
 use flipbox\saml\core\records\LinkRecord;
 
 /**
  */
-// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 abstract class m201029_200000_keychain_link_provideruid extends Migration
 {
-
     /**
      * @return ActiveQuery
      */

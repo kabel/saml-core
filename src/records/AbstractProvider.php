@@ -7,6 +7,7 @@ use craft\helpers\StringHelper;
 use craft\records\Site;
 use flipbox\keychain\records\KeyChainRecord;
 use flipbox\saml\core\helpers\UrlHelper;
+use flipbox\saml\core\models\AbstractSettings;
 use flipbox\saml\core\models\GroupOptions;
 use flipbox\saml\core\models\MetadataOptions;
 use flipbox\saml\core\records\traits\Ember;
@@ -14,7 +15,6 @@ use SAML2\DOMDocumentFactory;
 use SAML2\XML\md\EntityDescriptor;
 use yii\db\ActiveQuery;
 use yii\db\ActiveQueryInterface;
-use flipbox\saml\core\models\AbstractSettings;
 
 /**
  * Class AbstractProvider
@@ -22,11 +22,10 @@ use flipbox\saml\core\models\AbstractSettings;
  */
 abstract class AbstractProvider extends ActiveRecord implements ProviderInterface
 {
-
     use traits\EntityDescriptor, traits\KeyChain, traits\MapUser, Ember;
 
-    const METADATA_HASH_ALGORITHM = 'sha256';
-    const DEFAULT_GROUPS_ATTRIBUTE_NAME = 'groups';
+    public const METADATA_HASH_ALGORITHM = 'sha256';
+    public const DEFAULT_GROUPS_ATTRIBUTE_NAME = 'groups';
 
     protected $metadataModel;
     protected $cachedKeychain;
@@ -50,9 +49,9 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
      */
     abstract public function getLogoutPath();
 
-    abstract protected function getDefaultSettings():AbstractSettings;
+    abstract protected function getDefaultSettings(): AbstractSettings;
 
-    public function getLoginRequestEndpoint(?AbstractSettings $settings = null)
+    public function getLoginRequestEndpoint(AbstractSettings $settings = null)
     {
         return UrlHelper::buildEndpointUrl(
             $settings ?? $this->getDefaultSettings(),
@@ -62,7 +61,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
         );
     }
 
-    public function getLoginEndpoint(?AbstractSettings $settings = null)
+    public function getLoginEndpoint(AbstractSettings $settings = null)
     {
         return UrlHelper::buildEndpointUrl(
             $settings ?? $this->getDefaultSettings(),
@@ -72,7 +71,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
         );
     }
 
-    public function getLogoutRequestEndpoint(?AbstractSettings $settings = null)
+    public function getLogoutRequestEndpoint(AbstractSettings $settings = null)
     {
         return UrlHelper::buildEndpointUrl(
             $settings ?? $this->getDefaultSettings(),
@@ -82,7 +81,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
         );
     }
 
-    public function getLogoutEndpoint(?AbstractSettings $settings = null)
+    public function getLogoutEndpoint(AbstractSettings $settings = null)
     {
         return UrlHelper::buildEndpointUrl(
             $settings ?? $this->getDefaultSettings(),
@@ -122,7 +121,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
      */
     public function beforeSave($insert): bool
     {
-        if (! $this->entityId) {
+        if (!$this->entityId) {
             $this->entityId = $this->getEntityId();
         }
 
@@ -164,8 +163,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
      */
     public function getMetadataModel()
     {
-
-        if (! $this->metadataModel && $this->metadata) {
+        if (!$this->metadataModel && $this->metadata) {
             $this->metadataModel = new EntityDescriptor(
                 DOMDocumentFactory::fromString($this->metadata)->documentElement
             );
@@ -234,7 +232,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
      * @param KeyChainRecord $keyChain
      * @return AbstractProvider
      */
-    public function setKeychain(?KeyChainRecord $keyChain)
+    public function setKeychain(KeyChainRecord $keyChain)
     {
         $this->populateRelation('keychain', $keyChain);
         return $this;
@@ -243,7 +241,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
     /**
      *
      */
-    public function setSite(?Site $site)
+    public function setSite(Site $site)
     {
         $this->populateRelation('site', $site);
         return $this;
@@ -365,7 +363,7 @@ abstract class AbstractProvider extends ActiveRecord implements ProviderInterfac
      */
     protected function hasJsonProperty(string $property)
     {
-        if (! $this->{$property}) {
+        if (!$this->{$property}) {
             return false;
         }
         try {

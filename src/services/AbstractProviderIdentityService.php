@@ -22,9 +22,7 @@ use yii\helpers\Json;
  * @package flipbox\saml\core\services
  * @property \DateTime $lastLoginDate
  */
-abstract class AbstractProviderIdentityService extends Component implements
-    ProviderIdentityServiceInterface,
-    EnsureSAMLPlugin
+abstract class AbstractProviderIdentityService extends Component implements ProviderIdentityServiceInterface, EnsureSAMLPlugin
 {
     /**
      * @inheritdoc
@@ -71,7 +69,7 @@ abstract class AbstractProviderIdentityService extends Component implements
                 'providerId' => $provider->id,
                 'enabled' => true,
                 'userId' => $user->getId(),
-                'lastLoginDate' => new \DateTime,
+                'lastLoginDate' => new \DateTime(),
             ]);
     }
 
@@ -99,10 +97,9 @@ abstract class AbstractProviderIdentityService extends Component implements
     public function save(
         ProviderIdentityInterface $record,
         $runValidation = true,
-        $attributeNames = null
+        $attributeNames = null,
     ): ProviderIdentityInterface {
-
-        if (! $record->save($runValidation, $attributeNames)) {
+        if (!$record->save($runValidation, $attributeNames)) {
             throw new \Exception(Json::encode($record->getErrors()));
         }
 

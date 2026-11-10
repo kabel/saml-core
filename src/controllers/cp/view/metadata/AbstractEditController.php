@@ -12,10 +12,10 @@ use Craft;
 use craft\helpers\UrlHelper;
 use flipbox\saml\core\AbstractPlugin;
 use flipbox\saml\core\controllers\cp\view\AbstractController;
-use flipbox\saml\core\records\AbstractProvider;
-use flipbox\saml\core\records\ProviderInterface;
 use flipbox\saml\core\EnsureSAMLPlugin;
 use flipbox\saml\core\models\SettingsInterface;
+use flipbox\saml\core\records\AbstractProvider;
+use flipbox\saml\core\records\ProviderInterface;
 
 /**
  * Class AbstractEditController
@@ -25,7 +25,7 @@ abstract class AbstractEditController extends AbstractController implements Ensu
 {
     use VariablesTrait;
 
-    const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp' . DIRECTORY_SEPARATOR . 'metadata';
+    public const TEMPLATE_INDEX = DIRECTORY_SEPARATOR . '_cp' . DIRECTORY_SEPARATOR . 'metadata';
 
     /**
      * @param string|null $providerId
@@ -54,8 +54,7 @@ abstract class AbstractEditController extends AbstractController implements Ensu
 
         $variables = array_merge($variables, $overwriteVariables);
         return $this->renderTemplate(
-            $this->getPlugin()->getEditProvider()->getTemplateIndex() .
-                static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'edit',
+            $this->getPlugin()->getEditProvider()->getTemplateIndex() . static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'edit',
             $variables
         );
     }
@@ -210,8 +209,7 @@ abstract class AbstractEditController extends AbstractController implements Ensu
         $variables['createType'] = $variables['myType'];
 
         return $this->renderTemplate(
-            $this->getPlugin()->getEditProvider()->getTemplateIndex() .
-                static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'edit',
+            $this->getPlugin()->getEditProvider()->getTemplateIndex() . static::TEMPLATE_INDEX . DIRECTORY_SEPARATOR . 'edit',
             $variables
         );
     }

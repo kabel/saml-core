@@ -7,4 +7,10 @@ composer.lock
 .idea
 .env
 node_modules
-.phpactor.json
+
+# Tests
+tests/.env
+tests/_support/_generated
+tests/_craft/config/project/
+.phpunit.cache
+cpresources/

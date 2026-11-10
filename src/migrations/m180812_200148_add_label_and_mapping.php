@@ -2,16 +2,13 @@
 
 namespace flipbox\saml\core\migrations;
 
-use Craft;
 use craft\db\Migration;
 
 /**
  * m180812_200148_add_provider_label migration.
  */
-// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 abstract class m180812_200148_add_label_and_mapping extends Migration
 {
-
     abstract protected static function getProviderTableName();
 
     /**

@@ -33,7 +33,7 @@ abstract class AbstractProviderService extends Component implements ProviderServ
         /** @var AbstractProvider $class */
         $class = $this->getPlugin()->getProviderRecordClass();
 
-        if (! $provider = $class::find()->where($condition)) {
+        if (!$provider = $class::find()->where($condition)) {
             return null;
         }
 
@@ -61,7 +61,7 @@ abstract class AbstractProviderService extends Component implements ProviderServ
      */
     protected function findByType($type, $condition = [])
     {
-        if (! in_array($type, ['sp', 'idp'])) {
+        if (!in_array($type, ['sp', 'idp'])) {
             throw new \InvalidArgumentException("Type must be idp or sp.");
         }
         return $this->find(
@@ -88,13 +88,11 @@ abstract class AbstractProviderService extends Component implements ProviderServ
     /**
      * @inheritdoc
      */
-    public function create(
-        EntityDescriptor $entityDescriptor,
-        ?KeyChainRecord $keyChainRecord = null
-    ): ProviderInterface {
-
+    public function create(EntityDescriptor $entityDescriptor, KeyChainRecord $keyChainRecord = null): ProviderInterface
+    {
         $recordClass = $this->getPlugin()->getProviderRecordClass();
 
+        /** @var ProviderInterface $provider */
         $provider = (new $recordClass())
             ->loadDefaultValues();
 
@@ -118,14 +116,14 @@ abstract class AbstractProviderService extends Component implements ProviderServ
     /**
      * @inheritdoc
      */
-    public function save(ProviderInterface $record, $runValidation = true, $attributeNames = null)
+    public function save(AbstractProvider $record, $runValidation = true, $attributeNames = null)
     {
         if ($record->isNewRecord) {
             $record->loadDefaultValues();
         }
 
         //save record
-        if (! $record->save($runValidation, $attributeNames)) {
+        if (!$record->save($runValidation, $attributeNames)) {
             throw new \Exception(Json::encode($record->getErrors()));
         }
 
@@ -148,9 +146,9 @@ abstract class AbstractProviderService extends Component implements ProviderServ
         AbstractProvider $provider,
         KeyChainRecord $keyChain,
         $runValidation = true,
-        $attributeNames = null
+        $attributeNames = null,
     ) {
-        if (! $provider->id && ! $keyChain->id) {
+        if (!$provider->id && !$keyChain->id) {
             throw new \Exception('Provider id and keychain id must exist before linking.');
         }
         $linkAttributes = [
@@ -159,7 +157,7 @@ abstract class AbstractProviderService extends Component implements ProviderServ
         ];
 
         /** @var LinkRecord $link */
-        if (! $link = LinkRecord::find()->where($linkAttributes)->one()) {
+        if (!$link = LinkRecord::find()->where($linkAttributes)->one()) {
             $link = new LinkRecord($linkAttributes);
         }
 
@@ -168,7 +166,7 @@ abstract class AbstractProviderService extends Component implements ProviderServ
             $link,
             $linkAttributes
         );
-        if (! $link->save($runValidation, $attributeNames)) {
+        if (!$link->save($runValidation, $attributeNames)) {
             throw new \Exception(Json::encode($provider->getErrors()));
         }
     }
